@@ -1,0 +1,10 @@
+**/bin
+**/Thumbs.db
+**/.DS_Store
+**/.gradle
+**/build
+**/out
+**/.idea
+node_modules
+.lighthouseci
+jte-classes

@@ -1,0 +1,8 @@
+@param path: String
+
+@template.layout(title = "404 - Página não encontrada", content = @`
+    @template.partials.error(errorCode = 404, errorName = "Página não encontrada", message = @`
+        A página que você tentou acessar não
+        existe: <code>${path}</code>
+    `)
+`)
