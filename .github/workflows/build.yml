@@ -236,7 +236,9 @@ jobs:
       - name: Create Github Release
         env:
           GH_TOKEN: ${{ github.token }}
+        # TAG_NAME value is trying to emulate semver to avoid release ordering issues.
+        # See https://github.com/orgs/community/discussions/8226.
         run: |
           RELEASE_TITLE=$(date '+%Y %b %d %H:%M:%S')
-          TAG_NAME="v${{ github.run_number }}-$(git log HEAD -1 --pretty=format:'%h')"
+          TAG_NAME="v$(date '+%Y%m%d.%H%M.%S')"
           gh release create "$TAG_NAME" --title "$RELEASE_TITLE" --generate-notes --latest
