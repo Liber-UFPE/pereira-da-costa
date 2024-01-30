@@ -14,6 +14,7 @@ import org.apache.lucene.index.IndexWriterConfig
 import org.apache.lucene.store.Directory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import kotlin.system.measureTimeMillis
 
 @Singleton
 @EagerInProduction
@@ -45,19 +46,21 @@ class Indexer(
         logger.info("Starting to index all books")
         IndexWriter(directory, IndexWriterConfig(analyzer)).use { writer ->
             bookRepository.listAll().parallelStream().forEach { book ->
-                book.pages.forEach { page ->
-                    val doc = Document()
+                val time = measureTimeMillis {
+                    book.pages.forEach { page ->
+                        val doc = Document()
 
-                    // Book fields
-                    doc.add(StoredField(BookMetadata.NUMBER, book.number))
+                        // Book fields
+                        doc.add(StoredField(BookMetadata.NUMBER, book.number))
 
-                    // Page fields
-                    doc.add(StoredField(PageMetadata.NUMBER, page.number))
-                    doc.add(StoredField(PageMetadata.YEAR, page.year))
-                    doc.add(richTextField(PageMetadata.TEXT, page.text))
-
-                    writer.addDocument(doc)
+                        // Page fields
+                        doc.add(StoredField(PageMetadata.NUMBER, page.number))
+                        doc.add(StoredField(PageMetadata.YEAR, page.year))
+                        doc.add(richTextField(PageMetadata.TEXT, page.text))
+                        writer.addDocument(doc)
+                    }
                 }
+                logger.info("Book ${book.number} indexed in $time ms")
             }
         }
         logger.info("All books indexed")
