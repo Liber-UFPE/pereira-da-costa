@@ -10,7 +10,7 @@
                 <div class="py-8 lg:py-16">
                     <h1 class="mb-4 text-6xl text-gray-800">Nenhum resultado</h1>
                     <p class="mb-4 text-2xl tracking-tight text-gray-800 md:text-2xl">Ooops, nenhum resultado foi encontrado para essa busca: <mark>${query}</mark>.</p>
-                    <a href="${linkTo("/advanced-search")}" class="inline-flex text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center my-4">Tente a busca avançada</a>
+                    <a href="${linkTo("/advanced-search")}" class="inline-flex text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 text-center my-4">Tente a busca avançada</a>
                 </div>
             </section>
         `)
