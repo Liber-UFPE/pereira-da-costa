@@ -57,9 +57,9 @@ class Search(
         val searchResults =
             topDocs.scoreDocs.slice(pagingStart..pagingEnd).map { scoreDoc ->
                 val document = storedFields.document(scoreDoc.doc)
-                val pageContents = document.get(PageMetadata.TEXT)
+                val pageContents = document[PageMetadata.TEXT]
 
-                val fields = termVectors.get(scoreDoc.doc)
+                val fields = termVectors[scoreDoc.doc]
                 val highlightedContent = textHighlighter.highlightContent(highlighter, pageContents, fields)
 
                 SearchResult(document, highlightedContent)
@@ -76,11 +76,11 @@ data class SearchResult(
     val highlightedContent: Content,
 ) {
     constructor(doc: Document, highlightedContent: Content) : this(
-        Book(number = doc.get(BookMetadata.NUMBER).toInt()),
+        Book(number = doc[BookMetadata.NUMBER].toInt()),
         Page(
-            number = doc.get(PageMetadata.NUMBER).toInt(),
-            year = doc.get(PageMetadata.YEAR).toInt(),
-            text = doc.get(PageMetadata.TEXT),
+            number = doc[PageMetadata.NUMBER].toInt(),
+            year = doc[PageMetadata.YEAR].toInt(),
+            text = doc[PageMetadata.TEXT],
         ),
         highlightedContent,
     )

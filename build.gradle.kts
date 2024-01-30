@@ -304,6 +304,8 @@ buildTimeTracker {
 // Install pre-commit git hooks to run ktlint and detekt
 // https://docs.gradle.org/current/userguide/working_with_files.html#sec:copying_single_file_example
 tasks.register<Copy>("installGitHooks") {
+    group = "setup"
+    description = "Install pre-commit git hooks"
     from(layout.projectDirectory.file("scripts/pre-commit"))
     into(layout.projectDirectory.dir(".git/hooks/"))
 }
