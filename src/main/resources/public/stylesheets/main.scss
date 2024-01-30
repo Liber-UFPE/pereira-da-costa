@@ -4,8 +4,12 @@
 @tailwind utilities;
 
 @layer base {
+    .font-family-inherit {
+        font-family: inherit;
+    }
+
     .main-section-bg {
-        @apply bg-gradient-to-l from-sky-700 from-5% via-indigo-800 via-50% to-blue-700 to-95%;
+        @apply bg-gradient-to-l from-lime-700 from-5% via-cyan-800 via-50% to-green-700 to-95%;
     }
 
     mark {
@@ -48,11 +52,11 @@
 
     @keyframes glow {
         from {
-            box-shadow: 0 0 10px -10px #76a9fa;
+            box-shadow: 0 0 10px -10px #4ade80;
         }
 
         to {
-            box-shadow: 0 0 10px 10px #76a9fa;
+            box-shadow: 0 0 10px 10px #4ade80;
         }
     }
 }

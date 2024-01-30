@@ -1,0 +1,123 @@
+@import br.ufpe.liber.views.LinksHelper
+
+@template.layout(title = "Quem foi Pereira da Costa", content = @`
+    @template.partials.main-section(title = "Quem foi Pereira da Costa", subtext = @`
+        <p class="mb-3 text-3xl text-blue-50" vocab="https://schema.org/" typeof="Person">
+            <span property="name">Francisco Augusto Pereira da Costa</span> (<em class="italic">Recife, <span property="birthDate">16 de dezembro de 1851</span>&midast; — <span property="deathDate">21 de novembro de 1923</span>&dagger;</em>) foi um advogado, jornalista, historiador e político brasileiro.
+        </p>
+    `)
+    @template.partials.content-section(content = @`
+        <article class="format lg:format-lg" property="description">
+            @template.assets.picture(
+                path = "/images/pereira-da-costa.jpg",
+                prefix = "/static",
+                alt = "Pereira da Costa",
+                width = 280,
+                height = 308,
+                imgClasses = "float-start rounded mb-1 me-4"
+            )
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Pereira da Costa foi historiador, folclorista e escritor. Filho de Manuel Brandão Pereira Costa e Maria Augusta Pereira Costa, nasceu no dia 16 de dezembro de 1851, na antiga rua Bela, nº 10 (atualmente rua Uchôa Cintra, nº 40), bairro de Santo Antônio.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Começou a trabalhar muito cedo. De família pobre, mal terminou o curso primário no Colégio Nossa Senhora do Bom Conselho e aos 16 anos começou a trabalhar como funcionário de uma livraria na rua Imperatriz, onde tomou gosto pelos livros. Objeto que nunca mais abandonou.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Em 1871 Aos 20 anos, trabalhou como amanuense na repartição de Obras Públicas, depois na Conservação dos Portos, na Secretaria do Governo, Iniciou-se no jornalismo aos 21 anos colaborando com o jornal Diário de Pernambuco, do Recife, em 1872.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Em 1880 foi encarregado pelo Presidente da Província de coligir documentos para figurar na Exposição de História do Brasil, a realizar-se no Rio de Janeiro (dezembro, 1881); em 1886 apresentou relatório sobre a situação dos livros e documentos existentes nos mosteiros e conventos de Olinda e do Recife; em 1884 transferiu-se, por curto período, para a Província do Piauí onde passou a exercer as funções de Secretário Geral, atendendo convite do Governador F. Theodorico de Castro e Silva; integrou o Conselho Municipal do Recife, no período de 1884 a 1891. Foi também professor de colégios tradicionais, entre eles o Ginásio Pernambucano e o Liceu de Artes e Ofícios.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Ingressou na Faculdade de Direito do Recife, onde se tornou bacharel em Ciências Jurídicas e Sociais em 20 de maio de 1891. Em 15 de dezembro de 1900, Pereira Costa ingressa na política sendo eleito pela primeira vez deputado estadual do 2º distrito, cargo que ocupou por oito legislaturas, vindo a falecer ainda no cargo em 21 de novembro de 1923.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Membro do Instituto Arqueológico, Histórico e Geográfico Pernambucano, recebeu o título de Sócio Benemérito. Segundo ele, o Instituto Arqueológico foi a sua escola, a sua tenda de trabalho onde encontrou grandes mestres.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Participou da fundação da Academia Pernambucana de Letras e atuou como membro em várias instituições brasileiras, como os Institutos Histórico e Geográfico de Alagoas, Ceará, Paraíba, Bahia e São Paulo.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Pereira da Costa é autor de obras indispensáveis para o conhecimento da história e da cultura pernambucana. O folclore, o vocabulário, os heróis - tudo o que diz respeito ao estado foi pesquisado pelo autor. Como escritor, publicou 192 trabalhos, entre livros, periódicos e artigos. Os “Anais Pernambucanos”, sua obra principal, foi publicada em 1951 e conta com cerca de cinco mil páginas que narram a história pernambucana de 1493 a 1850. Outras obras também tiveram grande destaque, como Folk-Lore Pernambucano, editado em 1974, e Vocábulos Pernambucanos, de 1976. "Enciclopédia Brasileira" (1889); "Dicionário Biográfico de Pernambucanos Célebres".</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Há diversas definições sobre Pereira da Costa, entretanto, a mais brilhante veio do punho do poeta João Cabral de Melo Neto, no seu <a href="${LinksHelper.linkTo("/poema")}" class="text-blue-700 underline hover:text-blue-800 underline-offset-2">poema a Pereira da Costa</a>.</p>
+
+            <figure class="max-w-full">
+                <blockquote class="p-4 my-4 border-s-4 border-green-300 bg-green-50">
+                    <svg class="w-8 h-8 text-green-400 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+                        <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
+                    </svg>
+                    <pre class="text-2xl font-normal text-gray-700 font-family-inherit leading-relaxed">Quando no barco a linha da água
+era baixa, quase naufrágio,
+ele foi quem mais ajudou
+o Pernambuco necessário
+Porque com sua aplicação
+não de artista não de operário
+foi reunindo tudo, salvando
+tanto o perdido quanto o achado
+Sem o sotaque do escritor
+nem o demônio do missionário,
+Só quis de pernambucania
+ser simples professor primário.
+
+<span class="italic font-thin">João Cabral de Melo Neto</span></pre>
+                </blockquote>
+            </figure>
+
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Deixando inéditos os Anais Pernambucanos e também o Vocabulário pernambucano, Pereira da Costa escreveu e publicou:</p>
+
+            <ul class="space-y-1 text-lg text-gray-800 list-disc list-inside" property="author">
+                <li>Modesto monumento à memória de Demétrio Acácio de Albuquerque Melo</li>
+                <li>Escorço biográfico do desembargador Nunes Machado</li>
+                <li>Dicionário biográfico de pernambucanos célebres</li>
+                <li>Comarcas da província de Pernambuco</li>
+                <li>Mosaico pernambucano</li>
+                <li>Pernambuco ao Ceará</li>
+                <li>Notícia sobre as comarcas da província do Piauí</li>
+                <li>Relatório sobre as bibliotecas dos conventos do Recife e de Olinda</li>
+                <li>Cronologia histórica do estado do Piauí</li>
+                <li>A ilha de Fernando de Noronha</li>
+                <li>Enciclopediana brasileira</li>
+                <li>A idéia abolicionista em Pernambuco</li>
+                <li>Bispos de Olinda</li>
+                <li>Viaturas coloniais</li>
+                <li>Ruas do Recife</li>
+                <li>Teatro Santa Isabel</li>
+                <li>Em prol da integridade do território de Pernambuco</li>
+                <li>Seleta pernambucana</li>
+                <li>Notícia histórico-topográfica da povoação do Poço da Panela</li>
+                <li>Memória justificativa do direito que assiste à municipalidade do Recife sobre o edifício em que funciona o foro da capital</li>
+                <li>Quarto centenário do descobrimento de Pernambuco</li>
+                <li>Carta de Pero Vaz de Caminha</li>
+                <li>Pernambuco nas lutas emancipacionistas da Bahia</li>
+                <li>Notícia histórica sobre a igreja de Nossa Senhora do Rosário da Boa Vista</li>
+                <li>A verdadeira naturalidade de dom Antônio Felipe Camarão</li>
+                <li>Origens históricas da indústria açucareira em Pernambuco</li>
+                <li>Contradita às pretensões do município baiano de Curaçá sobre a Passagem da Boa Vista no rio São Francisco</li>
+                <li>Notícia biográfica do doutor Antônio Morais e Silva, autor do primeiro dicionário da língua portuguesa</li>
+                <li>João Fernandes Vieira à luz da história e da crítica</li>
+                <li>Dom Antônio Felipe Camarão - última verba</li>
+                <li>Homenagem à Benemérita Sociedade dos Artistas Mecânicos e Liberais de Pernambuco do Liceu de Artes e Ofícios no dia do 50º aniversário da sua instalação</li>
+                <li>Sinopse dos trabalhos legislativos da Câmara dos Deputados do Estado de Pernambuco na sessão ordinária de 1892</li>
+                <li>Folclore pernambucano</li>
+                <li>O algodão em Pernambuco</li>
+                <li>Eleições em Pernambuco</li>
+                <li>Restos mortais de João Fernandes Vieira</li>
+                <li>Estabelecimento e desenvolvimento da imprensa em Pernambuco</li>
+                <li>Bento Teixeira Pinto</li>
+                <li>As portas do Recife e o arco da capela do Bom Jesus</li>
+                <li>Relatório sobre os arquivos públicos de Olinda</li>
+                <li>História do teatro em Pernambuco</li>
+                <li>A Inquisição em Pernambuco</li>
+                <li>Donatários, capitães-mor e governadores de Pernambuco</li>
+                <li>Pedro Álvares Cabral</li>
+                <li>As artes em Pernambuco</li>
+                <li>Primeiras observações meteorológicas no Brasil</li>
+                <li>O passo do fidalgo</li>
+                <li>Duas instituições inglesas em Pernambuco</li>
+                <li>O governo holandês</li>
+                <li>O governo republicano de 1817</li>
+                <li>Confederação do Equador</li>
+                <li>Governo de Pernambuco de 1821 a 1889</li>
+                <li>Investigações sobre a mineralogia, flora e fauna de Pernambuco</li>
+                <li>A poesia na revolução de 1817</li>
+                <li>Causas eficientes da emancipação de Alagoas</li>
+            </ul>
+
+            <p class="font-normal text-gray-700 mt-4 text-2xl">Referências:</p>
+            <p class="text-gray-800 text-lg leading-relaxed">HÉLIO, Mario. <a href="https://web.archive.org/web/20160616212117/http://www2.uol.com.br/JC/_2001/0303/cu0412_1.htm" class="text-blue-700 underline hover:text-blue-800 underline-offset-2">O Mestre de Todos Os Pernambucanos, “O mestre de todos nós” faz 150 anos, Recife, Jornal do Commercio</a>, 04.12.2000</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">PEREIRA DA COSTA, F. A. Anais Pernambucanos, 1834 -1850. Recife: Fundarpe, 1985</p>
+        </article>
+    `)
+`, metadata = @`
+    <meta name="description" content="Francisco Augusto Pereira da Costa</span> (Recife, 16 de dezembro de 1851 — 21 de novembro de 1923) foi um advogado, jornalista, historiador e político brasileiro.">
+    <meta property="og:description" content="Francisco Augusto Pereira da Costa</span> (Recife, 16 de dezembro de 1851 — 21 de novembro de 1923) foi um advogado, jornalista, historiador e político brasileiro.">
+    <meta property="og:title" content="Quem foi Pereira da Costa">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt-BR">
+    <meta property="og:site_name" content="Laboratório Liber">
+`)

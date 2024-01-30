@@ -1,13 +1,31 @@
+@import br.ufpe.liber.views.LinksHelper.linkTo
+
 @template.layout(title = "Início", content = @`
     <section class="main-section-bg">
         <div class="px-4 pt-8 mx-auto max-w-screen-xl z-10 relative md:pt-16 text-center">
-            <h1 class="mb-4 leading-none text-6xl text-gray-800 tracking-tight text-white md:text-8xl lg:text-8xl">Project Starter Template</h1>
+            <h1 class="mb-4 leading-none text-6xl text-gray-800 tracking-tight text-white md:text-8xl lg:text-8xl">O Projeto Pereira da Costa</h1>
+            <div class="flex justify-center items-center">
+                @template.assets.picture(
+                    path = "/images/francisco-augusto-pereira-da-costa2.png",
+                    prefix = "/static",
+                    pictureClasses = "bg-green-50 rounded-t-lg pt-10 mt-4",
+                    alt = "Pereira da Costa", width = 640, height = 489)
+            </div>
         </div>
     </section>
     @template.partials.content-section(content = @`
         <article class="format lg:format-lg">
-            <p class="mb-3 text-3xl text-gray-800">Some text</p>
-            <p class="text-gray-800 leading-relaxed mb-4">Some more tesxt</p>
+            <p class="text-3xl text-gray-700 mb-6 md:mb-8">O projeto Pergunte a Pereira da Costa publica em formato digital os 10 volumes dos “Anais Pernambucanos” num total de <span class="underline decoration-dotted" title="Cinco mil quinhentas e sessenta e seis páginas">5.566</span> páginas.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">O projeto Pergunte a Pereira da Costa publica em formato digital os 10 volumes dos <a href="${linkTo("/anais-pernambucanos")}" class="text-blue-700 underline hover:text-blue-800 underline-offset-2">“Anais Pernambucanos”</a> num total de 5.566 páginas. Contando com instrumentos que permitem buscas complexas, este sistema de difusão de alto desempenho e baixo custo permite a preservação, revitalização, gestão e divulgação de uma das obras mais importantes da historiografia Pernambucana, contribuindo para a construção da memória social, política, econômica e cultural do Estado de Pernambuco.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">A utilização do formato digital facilita o tratamento homogêneo da extensa obra, a sua consulta e reprodução de forma permanente e contínua, mas, mais do que isso permite - nos continuar o trabalho iniciado por <a href="${linkTo("/pereira-da-costa")}" class="text-blue-700 underline hover:text-blue-800 underline-offset-2">Pereira da Costa</a>.</p>
+            <p class="text-gray-800 text-lg leading-relaxed mb-4">Volte sempre e <a href="${linkTo("/contato")}" class="text-blue-700 underline hover:text-blue-800 underline-offset-2">faça sugestões de ajustes e mudanças</a>, nosso objetivo principal é propiciar aos que aqui chegam o melhor contato possível com a beleza e a riqueza da história pernambucana.</p>
         </article>
     `)
+`, metadata = @`
+    <meta name="description" content="O projeto Pereira da Costa publica em formato digital os 10 volumes dos Anais Pernambucanos, num total de 5.566 páginas" />
+    <meta property="og:title" content="O Projeto Pereira da Costa">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="O projeto Pereira da Costa publica em formato digital os 10 volumes dos Anais Pernambucanos, num total de 5.566 páginas">
+    <meta property="og:locale" content="pt-BR">
+    <meta property="og:site_name" content="Laboratório Liber">
 `)
