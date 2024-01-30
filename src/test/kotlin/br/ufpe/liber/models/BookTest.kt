@@ -169,7 +169,7 @@ class BookTest(private val resourceResolver: ResourceResolver) : BehaviorSpec({
 
             then("last page should have a previous page") {
                 val lastPage = book.pages.last()
-                book.previousPage(lastPage.number, lastPage.year) shouldBePresent {previousPage ->
+                book.previousPage(lastPage.number, lastPage.year) shouldBePresent { previousPage ->
                     previousPage.year shouldBe lastPage.year
                     previousPage.number shouldBeLessThan lastPage.number
                 }
