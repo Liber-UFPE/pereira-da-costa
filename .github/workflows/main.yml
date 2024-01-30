@@ -3,6 +3,7 @@ name: Main
 on:
   release:
     types:
+      - created
       - published
 
 permissions:
