@@ -27,4 +27,11 @@ ser simples professor primário.
             </figure>
         </article>
     `)
+`, metadata = @`
+    <meta name="description" content="Poema a Pereira da Costa, escrito por João Cabral de Melo Neto">
+    <meta property="og:description" content="Poema a Pereira da Costa, escrito por João Cabral de Melo Neto">
+    <meta property="og:title" content="Poema a Pereira da Costa">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt-BR">
+    <meta property="og:site_name" content="Laboratório Liber">
 `)
