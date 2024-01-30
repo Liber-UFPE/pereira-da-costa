@@ -2,7 +2,10 @@ package br.ufpe.liber.models
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.collections.shouldBeSortedWith
+import io.kotest.matchers.ints.shouldBeGreaterThan
+import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.optional.shouldBePresent
+import io.kotest.matchers.optional.shouldNotBePresent
 import io.kotest.matchers.shouldBe
 import io.micronaut.core.io.ResourceResolver
 import io.micronaut.test.extensions.kotest5.annotation.MicronautTest
@@ -140,6 +143,36 @@ class BookTest(private val resourceResolver: ResourceResolver) : BehaviorSpec({
                         1589 to 4,
                         1590 to 12,
                     )
+            }
+        }
+
+        `when`(".nextPage") {
+            then("first page should have a next page") {
+                val firstPage = book.pages.first()
+                book.nextPage(firstPage.number, firstPage.year) shouldBePresent { nextPage ->
+                    nextPage.year shouldBe firstPage.year
+                    nextPage.number shouldBeGreaterThan firstPage.number
+                }
+            }
+
+            then("last page should NOT have a next page") {
+                val lastPage = book.pages.last()
+                book.nextPage(lastPage.number, lastPage.year).shouldNotBePresent()
+            }
+        }
+
+        `when`(".previousPage") {
+            then("first page should NOT have a previous page") {
+                val firstPage = book.pages.first()
+                book.previousPage(firstPage.number, firstPage.year).shouldNotBePresent()
+            }
+
+            then("last page should have a previous page") {
+                val lastPage = book.pages.last()
+                book.previousPage(lastPage.number, lastPage.year) shouldBePresent {previousPage ->
+                    previousPage.year shouldBe lastPage.year
+                    previousPage.number shouldBeLessThan lastPage.number
+                }
             }
         }
     }
