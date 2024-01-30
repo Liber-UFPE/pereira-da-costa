@@ -137,7 +137,7 @@ sonar {
 
         property(
             "sonar.exclusions",
-            listOf("src/main/**/books/*.txt"),
+            listOf("src/main/resources/data/original/*.*"),
         )
     }
 }
