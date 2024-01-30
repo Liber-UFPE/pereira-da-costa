@@ -96,7 +96,7 @@ data class SearchResults(
         fun empty() = SearchResults()
     }
 
-    private val totalPages: Int = ceil(hits.toDouble() / Search.RESULTS_PER_PAGE).toInt()
+    val totalPages: Int = ceil(hits.toDouble() / Search.RESULTS_PER_PAGE).toInt()
     val isFirstPage: Boolean = currentPage == Pagination.FIRST
     val isLastPage: Boolean = currentPage == totalPages
     val pages = Pagination(currentPage, totalPages).listPages()
