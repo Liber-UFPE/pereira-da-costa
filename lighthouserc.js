@@ -14,6 +14,11 @@ module.exports = {
             },
             url: [
                 "http://localhost:8080/",
+                "http://localhost:8080/equipe",
+                "http://localhost:8080/pereira-da-costa",
+                "http://localhost:8080/anais-pernambucanos",
+                "http://localhost:8080/poema",
+                "http://localhost:8080/contato",
             ]
         },
         assert: {
