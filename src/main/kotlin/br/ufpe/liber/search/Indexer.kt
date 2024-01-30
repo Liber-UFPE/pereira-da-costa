@@ -3,8 +3,6 @@ package br.ufpe.liber.search
 import br.ufpe.liber.EagerInProduction
 import br.ufpe.liber.services.BooksRepository
 import jakarta.inject.Singleton
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.apache.lucene.analysis.Analyzer
 import org.apache.lucene.document.Document
 import org.apache.lucene.document.Field
@@ -46,26 +44,22 @@ class Indexer(
     init {
         logger.info("Starting to index all books")
         IndexWriter(directory, IndexWriterConfig(analyzer)).use { writer ->
-            runBlocking {
-                bookRepository.listAll().forEach { book ->
-                    launch {
-                        logger.info("Indexing book number ${book.number}")
-                        book.pages.forEach { page ->
-                            val doc = Document()
+            bookRepository.listAll().parallelStream().forEach { book ->
+                book.pages.forEach { page ->
+                    val doc = Document()
 
-                            // Book fields
-                            doc.add(StoredField(BookMetadata.NUMBER, book.number))
+                    // Book fields
+                    doc.add(StoredField(BookMetadata.NUMBER, book.number))
 
-                            // Page fields
-                            doc.add(StoredField(PageMetadata.NUMBER, page.number))
-                            doc.add(StoredField(PageMetadata.YEAR, page.year))
-                            doc.add(richTextField(PageMetadata.TEXT, page.text))
+                    // Page fields
+                    doc.add(StoredField(PageMetadata.NUMBER, page.number))
+                    doc.add(StoredField(PageMetadata.YEAR, page.year))
+                    doc.add(richTextField(PageMetadata.TEXT, page.text))
 
-                            writer.addDocument(doc)
-                        }
-                    }
+                    writer.addDocument(doc)
                 }
             }
         }
+        logger.info("All books indexed")
     }
 }
