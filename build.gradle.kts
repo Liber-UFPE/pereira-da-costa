@@ -81,7 +81,7 @@ java {
 
 sonar {
     properties {
-        property("sonar.projectKey", "Liber-UFPE_hyginia")
+        property("sonar.projectKey", "Liber-UFPE_pereira-da-costa")
         property("sonar.organization", "liber-ufpe")
         property("sonar.host.url", "https://sonarcloud.io")
 
