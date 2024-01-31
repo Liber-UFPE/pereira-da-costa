@@ -5,7 +5,6 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.apache.lucene.analysis.br.BrazilianAnalyzer
 
 class TextHighlighterTest : BehaviorSpec({
     val analyzer = SearchFactory().createAnalyzer()
@@ -22,6 +21,17 @@ class TextHighlighterTest : BehaviorSpec({
             }
         }
 
+        `when`("query has accented words") {
+            then("should highlight the accented words") {
+                val query = "assistência"
+                val text = "Ela precisará de assistência quando estiver em Recife"
+                TextHighlighter.highlightText(
+                    query,
+                    text,
+                ) shouldContain "Ela precisará de <mark>assistência</mark> quando estiver em Recife"
+            }
+        }
+
         `when`("query is empty") {
             then("should return the text as is") {
                 val text = "A capital de Pernambuco, Recife, é conhecida com a Veneza brasileira"
@@ -33,7 +43,10 @@ class TextHighlighterTest : BehaviorSpec({
             then("should not highlight the stop words") {
                 val query = "a capital de pernambuco"
                 val text = "Em Recife, a capital de Pernambuco"
-                TextHighlighter.highlightText(query, text) shouldContain "Em Recife, a <mark>capital</mark> de <mark>Pernambuco</mark>"
+                TextHighlighter.highlightText(
+                    query,
+                    text,
+                ) shouldContain "Em Recife, a <mark>capital</mark> de <mark>Pernambuco</mark>"
             }
         }
 

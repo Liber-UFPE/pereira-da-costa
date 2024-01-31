@@ -25,6 +25,7 @@ class TextHighlighter(private val analyzer: Analyzer) {
         const val MAX_NUM_FRAGMENTS = 4 // better for top results
         lateinit var staticAnalyzer: Analyzer // skipcq: KT-W1047
 
+        @Suppress("detekt:ReturnCount")
         fun highlightText(query: String, text: String): String {
             if (query.isBlank()) return text
 
