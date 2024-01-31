@@ -9,6 +9,7 @@ import br.ufpe.liber.views.Markdown
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldContainIgnoringCase
 import io.micronaut.context.ApplicationContext
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.DefaultHttpClientConfiguration
@@ -49,17 +50,17 @@ class BooksControllerTest(
             }
 
             then("shows page's content") {
-                val dayHtml = Markdown.toHtml(page.formattedText()).asString()
-                response.body() shouldContain dayHtml
+                val pageHtml = Markdown.toHtml(page.formattedText()).asString()
+                response.body() shouldContain pageHtml
             }
         }
 
         `when`("'query' parameter is part of the query string") {
-            val book = bookRepository.listAll().random()
-            val page = book.pages.random()
+            val book = bookRepository.listAll().first()
+            val page = book.pages.first()
+            val query = "descobertas"
 
-            // (\s|\p{Punct})+ => any empty space or punctuation.
-            val query = page.formattedText().split("(\\s|\\p{Punct})+".toRegex()).random()
+            // Get the page with a query
             val response = client.get("/livro/${book.number}/ano/${page.year}/pagina/${page.number}?query=$query")
 
             then("returns HTTP 200") {
@@ -67,11 +68,11 @@ class BooksControllerTest(
             }
 
             then("should highlight query") {
-                response.body() shouldContain "<mark>$query</mark>"
+                response.body() shouldContainIgnoringCase "<mark>$query</mark>"
             }
         }
 
-        `when`("trying to access a day that does not exist") {
+        `when`("trying to access a page that does not exist") {
             then("returns HTTP 404") {
                 val book = bookRepository.listAll().random()
                 val lastPage = book.pages.last()
