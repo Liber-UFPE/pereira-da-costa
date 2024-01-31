@@ -143,17 +143,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew sonar
-      - name: Gradle Tasks Summary
-        run: cat build/reports/build-times.md >> $GITHUB_STEP_SUMMARY
-      - name: Test Summary Report
-        uses: phoenix-actions/test-reporting@v12
-        if: always()
-        with:
-          name: Kotest Report
-          path: "build/test-results/test/TEST-*.xml"
-          reporter: java-junit
-          output-to: "step-summary"
-          only-summary: "true"
 
   build-docker:
     name: Package / Docker / build
