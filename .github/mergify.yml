@@ -1,1 +1,7 @@
-extends: .github
+pull_request_rules:
+  - name: Automatic merge when CI passes
+    conditions:
+      - check-success=Good to merge
+    actions:
+      merge:
+        method: rebase
