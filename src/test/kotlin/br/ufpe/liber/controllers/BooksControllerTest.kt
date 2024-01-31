@@ -3,6 +3,7 @@ package br.ufpe.liber.controllers
 import br.ufpe.liber.asString
 import br.ufpe.liber.assets.AssetsResolver
 import br.ufpe.liber.get
+import br.ufpe.liber.search.TextHighlighter
 import br.ufpe.liber.services.BooksRepository
 import br.ufpe.liber.views.Markdown
 import io.kotest.core.spec.style.BehaviorSpec
@@ -32,8 +33,8 @@ class BooksControllerTest(
     val bookRepository = context.getBean<BooksRepository>()
 
     beforeSpec {
-        context.getBean<BooksRepository>()
         context.getBean<AssetsResolver>()
+        context.getBean<TextHighlighter>()
     }
 
     given("#show page") {
@@ -50,6 +51,23 @@ class BooksControllerTest(
             then("shows page's content") {
                 val dayHtml = Markdown.toHtml(page.formattedText()).asString()
                 response.body() shouldContain dayHtml
+            }
+        }
+
+        `when`("'query' parameter is part of the query string") {
+            val book = bookRepository.listAll().random()
+            val page = book.pages.random()
+
+            // (\s|\p{Punct})+ => any empty space or punctuation.
+            val query = page.formattedText().split("(\\s|\\p{Punct})+".toRegex()).random()
+            val response = client.get("/livro/${book.number}/ano/${page.year}/pagina/${page.number}?query=$query")
+
+            then("returns HTTP 200") {
+                response.status() shouldBe HttpStatus.OK
+            }
+
+            then("should highlight query") {
+                response.body() shouldContain "<mark>$query</mark>"
             }
         }
 
