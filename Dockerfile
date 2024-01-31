@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install curl -y \
 RUN apt-get install -y wget apt-transport-https \
     && wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null \
     && echo "deb https://packages.adoptium.net/artifactory/deb bookworm main" | tee /etc/apt/sources.list.d/adoptium.list \
-    && apt-get update --quiet \
+    && apt-get update -y \
     && apt-get install temurin-21-jdk -y \
     && java -version
 
