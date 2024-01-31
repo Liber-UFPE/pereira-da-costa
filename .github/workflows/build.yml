@@ -174,15 +174,6 @@ jobs:
           docker container logs "$containerId"
           docker container stop "$containerId"
 
-  check-if-prod:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    name: Check if prod
-    runs-on: ubuntu-latest
-    needs:
-      - compile
-    steps:
-      - run: echo "This is a push to main branch. Following with release and deploy"
-
   good-to-merge:
     name: Good to merge
     runs-on: ubuntu-latest
@@ -191,6 +182,15 @@ jobs:
       - build-docker
     steps:
       - run: echo "This PR is ready to merge."
+
+  check-if-prod:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    name: Check if prod
+    runs-on: ubuntu-latest
+    needs:
+      - compile
+    steps:
+      - run: echo "This is a push to main branch. Following with release and deploy"
 
   create-release:
     name: Creates a GitHub Release
