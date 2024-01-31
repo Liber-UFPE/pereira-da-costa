@@ -15,6 +15,7 @@ import org.apache.lucene.search.highlight.QueryScorer
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter
 import org.apache.lucene.search.highlight.SimpleSpanFragmenter
 import org.apache.lucene.search.highlight.TokenSources
+import org.jetbrains.kotlin.js.parser.parse
 
 @Singleton
 @EagerInProduction
@@ -24,13 +25,17 @@ class TextHighlighter(private val analyzer: Analyzer) {
         const val MAX_NUM_FRAGMENTS = 4 // better for top results
         lateinit var staticAnalyzer: Analyzer // skipcq: KT-W1047
 
-        fun highlightText(query: String, text: String): String = if (query.isBlank()) {
-            text
-        } else {
+        fun highlightText(query: String, text: String): String {
+            if (query.isBlank()) return text
+
             val highlighter = TextHighlighter(staticAnalyzer)
-            highlighter.highlightText(
+            val parsedQuery = highlighter.query(query)
+
+            if (parsedQuery.toString().isBlank()) return text
+
+            return highlighter.highlightText(
                 highlighter.highlighter(
-                    query = highlighter.query(query),
+                    query = parsedQuery,
                     fragmenter = NullFragmenter(),
                 ),
                 text,
