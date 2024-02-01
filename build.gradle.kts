@@ -45,7 +45,7 @@ plugins {
     // https://github.com/SonarSource/sonar-scanner-gradle
     id("org.sonarqube") version "4.4.1.3373"
     // Add diktat
-    // https://github.com/marcospereira/diktat
+    // https://github.com/saveourtool/diktat
     id("com.saveourtool.diktat") version "2.0.0"
     // To run npm/node/js tasks
     // https://github.com/node-gradle/gradle-node-plugin
@@ -81,7 +81,7 @@ java {
 
 sonar {
     properties {
-        property("sonar.projectKey", "Liber-UFPE_pereira-da-costa")
+        property("sonar.projectKey", "Liber-UFPE_${project.name}")
         property("sonar.organization", "liber-ufpe")
         property("sonar.host.url", "https://sonarcloud.io")
 
