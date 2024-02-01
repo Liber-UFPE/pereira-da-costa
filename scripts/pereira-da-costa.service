@@ -24,7 +24,7 @@ Environment="MICRONAUT_ENVIRONMENTS=baremetal"
 # MUST be consistent with what is defined in nginx proxy pass
 # location for this application.
 Environment="PEREIRA_DA_COSTA_PORT=8082"
-Environment="PEREIRA_DA_COSTA_PATH=/hyginia"
+Environment="PEREIRA_DA_COSTA_PATH=/pereira-da-costa"
 
 # Valores apenas de exemplo, mas nos testes que fiz essa quantidade de memoria parecia suficiente.
 WorkingDirectory=/opt/javaapps
