@@ -6,16 +6,16 @@ pull_request_rules:
       merge:
         method: rebase
 
-  - name: [dependabot] Ask to rebase
+  - name: "[dependabot] Ask to rebase"
     conditions:
       - base=main
       - "#commits-behind>0"
       - author=dependabot
     actions:
       comment:
-        message: @{{author}} rebase
+        message: "@{{author}} rebase"
 
-  - name: [dependabot] Add labels for npm updates
+  - name: "[dependabot] Add labels for npm updates"
     conditions:
       - title~=npm
       - author=dependabot
@@ -25,7 +25,7 @@ pull_request_rules:
           - dependencies
           - javascript
 
-  - name: [dependabot] Add labels for GitHub Actions updates
+  - name: "[dependabot] Add labels for GitHub Actions updates"
     conditions:
       - title~=github-actions
       - author=dependabot
@@ -35,7 +35,7 @@ pull_request_rules:
           - dependencies
           - github-actions
 
-  - name: [dependabot] Add labels Gradle updates
+  - name: "[dependabot] Add labels Gradle updates"
     conditions:
       - title~=gradle
       - author=dependabot
