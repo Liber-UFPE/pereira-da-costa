@@ -25,7 +25,15 @@ RUN npm install \
 
 FROM eclipse-temurin:21
 
-ENV PEREIRA_DA_COSTA_PORT=8080
+LABEL org.opencontainers.image.description="Pereira da Costa Java Application Service"
+LABEL org.opencontainers.image.url="https://github.com/Liber-UFPE/pereira-da-costa/"
+LABEL org.opencontainers.image.documentation="https://github.com/Liber-UFPE/pereira-da-costa/"
+LABEL org.opencontainers.image.source="https://github.com/Liber-UFPE/pereira-da-costa/"
+LABEL org.opencontainers.image.vendor="Laboratório Liber / UFPE"
+LABEL org.opencontainers.image.licenses="Apache-2.0"
+LABEL org.opencontainers.image.title="Pereira da Costa"
+
+ENV VISAO_HOLANDESA_PORT=8080
 ENV MICRONAUT_ENVIRONMENTS=container
 
 COPY --from=build /app/app.jar .
