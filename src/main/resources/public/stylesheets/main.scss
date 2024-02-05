@@ -46,6 +46,12 @@
         }
     }
 
+    .w-25-percent {
+        @screen md {
+            width: 25%;
+        }
+    }
+
     #brand-button.htmx-request {
         animation: glow 0.7s infinite alternate;
     }

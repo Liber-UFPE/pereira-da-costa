@@ -14,7 +14,7 @@
                 alt = "Pereira da Costa",
                 width = 280,
                 height = 308,
-                imgClasses = "float-start rounded mb-1 me-4"
+                imgClasses = "float-start rounded mb-1 me-4 w-full md:w-25-percent"
             )
             <p class="text-gray-800 text-lg leading-relaxed mb-4">Pereira da Costa foi historiador, folclorista e escritor. Filho de Manuel Brandão Pereira Costa e Maria Augusta Pereira Costa, nasceu no dia 16 de dezembro de 1851, na antiga rua Bela, nº 10 (atualmente rua Uchôa Cintra, nº 40), bairro de Santo Antônio.</p>
             <p class="text-gray-800 text-lg leading-relaxed mb-4">Começou a trabalhar muito cedo. De família pobre, mal terminou o curso primário no Colégio Nossa Senhora do Bom Conselho e aos 16 anos começou a trabalhar como funcionário de uma livraria na rua Imperatriz, onde tomou gosto pelos livros. Objeto que nunca mais abandonou.</p>
