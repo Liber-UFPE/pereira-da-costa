@@ -9,10 +9,10 @@
             <div class="w-1/2">
                 <p class="tracking-wide text-lg font-semibold text-gray-600">Endereço</p>
                 <address class="tracking-wide font-normal text-gray-800 not-italic pb-8">
-                    Av. da Arquitetura,  s/n.<br />
-                    Cidade Universitária<br />
-                    Recife – PE, Brasil<br />
-                    CEP: 50740-550<br />
+                    Av. da Arquitetura,  s/n.<br>
+                    Cidade Universitária<br>
+                    Recife – PE, Brasil<br>
+                    CEP: 50740-550<br>
                 </address>
 
                 <p class="tracking-wide text-lg font-semibold text-gray-600">Telefone</p>
@@ -39,7 +39,7 @@
         </div>
     `)
 `, metadata = @`
-    <meta name="description" content="Como entrar em contato com o Laboratório Liber, mantenedor do projeto Monummenta Hygínia." />
+    <meta name="description" content="Como entrar em contato com o Laboratório Liber, mantenedor do projeto Monummenta Hygínia.">
     <meta property="og:title" content="Entre em Contato">
     <meta property="og:type" content="website">
     <meta property="og:description" content="Como entrar em contato com o Laboratório Liber, mantenedor do projeto Monummenta Hygínia.">

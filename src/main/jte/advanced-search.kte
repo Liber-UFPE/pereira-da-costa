@@ -48,7 +48,7 @@
         </div>
     `)
 `, metadata = @`
-    <meta name="description" content="Busca avançada do projeto Pereira da Costa." />
+    <meta name="description" content="Busca avançada do projeto Pereira da Costa.">
     <meta property="og:title" content="Busca Avançada - Pereira da Costa">
     <meta property="og:type" content="website">
     <meta property="og:description" content="Busca avançada do projeto Pereira da Costa.">

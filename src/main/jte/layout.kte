@@ -13,7 +13,7 @@
     @if(notHtmxRequest())
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${linkTo(fingerprinted("/static", "/images/favicon.ico"))}" rel="icon" type="image/x-icon" crossorigin="anonymous" />
+        <link href="${linkTo(fingerprinted("/static", "/images/favicon.ico"))}" rel="icon" type="image/x-icon" crossorigin="anonymous">
 
         @template.assets.stylesheet(path = "/stylesheets/main.css", prefix = "/static")
     @endif

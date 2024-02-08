@@ -22,7 +22,7 @@
         </article>
     `)
 `, metadata = @`
-    <meta name="description" content="O projeto Pereira da Costa publica em formato digital os 10 volumes dos Anais Pernambucanos, num total de 5.566 páginas" />
+    <meta name="description" content="O projeto Pereira da Costa publica em formato digital os 10 volumes dos Anais Pernambucanos, num total de 5.566 páginas">
     <meta property="og:title" content="O Projeto Pereira da Costa">
     <meta property="og:type" content="website">
     <meta property="og:description" content="O projeto Pereira da Costa publica em formato digital os 10 volumes dos Anais Pernambucanos, num total de 5.566 páginas">

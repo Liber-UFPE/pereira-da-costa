@@ -11,5 +11,5 @@
     <link href="${linkTo(asset.fullpath(prefix))}"
           rel="stylesheet"
           integrity="${asset.integrity}"
-          crossorigin="anonymous"/>
+          crossorigin="anonymous">
 @endif
