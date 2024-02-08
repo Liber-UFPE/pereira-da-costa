@@ -14,12 +14,6 @@ data class Book(
     @Transient
     private val pagesMap: NavigableMap<Key, Page> = TreeMap()
 
-    @Transient
-    val years: Map<Int, Int> = pages.groupingBy { it.year }.eachCount()
-
-    @Transient
-    val pagesSize = pages.size
-
     init {
         pages.forEach {
             pagesMap[Key(it.number, it.year)] = it
