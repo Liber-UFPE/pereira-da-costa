@@ -13,6 +13,19 @@ import java.util.Optional
 @Controller
 @Produces(MediaType.TEXT_HTML)
 class BooksController(private val templates: Templates, private val booksRepository: BooksRepository) : KteController {
+
+    @Get("/livro/{bookNumber}/ano/{year}")
+    fun year(bookNumber: Int, year: Int): HttpResponse<KteWriteable> {
+        return booksRepository
+            .get(bookNumber)
+            .flatMap { book ->
+                book.firstPage(year).map { page ->
+                    ok(templates.booksShow(book, page))
+                }
+            }
+            .orElse(notFound(templates.notFound(currentRequestPath())))
+    }
+
     @Get("/livro/{bookNumber}/ano/{year}/pagina/{pageNumber}")
     fun show(bookNumber: Int, year: Int, pageNumber: Int, query: Optional<String>): HttpResponse<KteWriteable> {
         return booksRepository

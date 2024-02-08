@@ -20,6 +20,7 @@ data class Book(
         }
     }
 
+    fun firstPage(year: Int): Optional<Page> = nextPage(0, year)
     fun page(page: Int, year: Int): Optional<Page> = Optional.ofNullable(pagesMap[Key(page, year)])
 
     fun nextPage(page: Int, year: Int): Optional<Page> =

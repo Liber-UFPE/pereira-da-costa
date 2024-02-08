@@ -1,6 +1,10 @@
 package br.ufpe.liber.models
 
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.data.forAll
+import io.kotest.data.headers
+import io.kotest.data.row
+import io.kotest.data.table
 import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.ints.shouldBeLessThan
@@ -60,6 +64,29 @@ class BookTest(private val resourceResolver: ResourceResolver) : BehaviorSpec({
             }
         }
 
+        `when`(".firstPage") {
+            forAll(
+                table(
+                    headers("year", "expected first page number"),
+                    row(1493, 18),
+                    row(1494, 22),
+                    row(1500, 30),
+                    row(1501, 50),
+                    row(1503, 64),
+                    row(1504, 66),
+                    row(1505, 72),
+                    row(1508, 78),
+                    row(1513, 80),
+                    row(1516, 84),
+                    row(1519, 96),
+                )
+            ) { year, expectedFirstPage ->
+                then("year $year should have $expectedFirstPage first page") {
+                    book.firstPage(year) shouldBePresent { page ->
+                        page.year shouldBe year
+                        page.number shouldBe expectedFirstPage
+                    }
+                }
             }
         }
 
