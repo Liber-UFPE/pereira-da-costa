@@ -3,6 +3,7 @@
 ![CI Workflow](https://github.com/Liber-UFPE/pereira-da-costa/actions/workflows/build.yml/badge.svg?branch=main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Liber-UFPE_pereira-da-costa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Liber-UFPE_pereira-da-costa)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Liber-UFPE_pereira-da-costa&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Liber-UFPE_pereira-da-costa)
+[![codecov](https://codecov.io/gh/Liber-UFPE/pereira-da-costa/graph/badge.svg?token=9aLOarxdP4)](https://codecov.io/gh/Liber-UFPE/pereira-da-costa)
 
 ## Executar localmente
 
