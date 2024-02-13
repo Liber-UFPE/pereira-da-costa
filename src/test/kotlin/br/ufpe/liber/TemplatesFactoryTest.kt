@@ -21,13 +21,13 @@ class TemplatesFactoryTest : BehaviorSpec({
             }
         }
 
-        `when`("it is NOT dev environment") {
-            forAll(
-                row(Environment.TEST),
-                row(Environment.CLI),
-                row(Environment.CLOUD),
-                row(Environment.BARE_METAL),
-            ) { envName ->
+        forAll(
+            row(Environment.TEST),
+            row(Environment.CLI),
+            row(Environment.CLOUD),
+            row(Environment.BARE_METAL),
+        ) { envName ->
+            `when`("it is $envName environment") {
                 val environment = mockk<Environment>()
                 every { environment.activeNames } answers { setOf(envName) }
 

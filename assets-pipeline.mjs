@@ -8,6 +8,9 @@ import autoprefixer from "autoprefixer";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
 
+// DO NOT EDIT: this file is automatically synced from the template repository
+// in https://github.com/Liber-UFPE/project-starter.
+
 const assetsFolder = "src/main/resources/public";
 const nodeModulesFolder = "node_modules";
 const assetsBuildFolder = "build/resources/main/public";
@@ -25,7 +28,7 @@ const compressPlugin = {
                 deflateLevel: 9,
                 gzip: true,
                 gzipLevel: 9,
-                exclude: ["jpeg", "jpg", "png", "webp"],
+                exclude: ["jpeg", "jpg", "png", "webp", "avif"],
                 verbose: verbose,
             };
 
@@ -40,10 +43,13 @@ const webpPlugin = {
         build.onEnd(() => {
             fg.async([`${build.initialOptions.outdir}/**/*.{png,jpg}`], {caseSensitiveMatch: false, dot: true})
                 .then(images =>
-                    images.map(image => {
+                    images.forEach(image => {
                         const imagePath = path.parse(image);
-                        const outputImage = `${imagePath.dir}/${imagePath.name}.webp`;
-                        return sharp(image).toFormat("webp").toFile(outputImage);
+                        const webpOutputImage = `${imagePath.dir}/${imagePath.name}.webp`;
+                        const avifOutputImage = `${imagePath.dir}/${imagePath.name}.avif`;
+
+                        sharp(image).toFormat("webp").toFile(webpOutputImage);
+                        sharp(image).toFormat("avif").toFile(avifOutputImage);
                     })
                 );
         });

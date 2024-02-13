@@ -1,3 +1,7 @@
+<%--
+DO NOT EDIT: this file is automatically synced from the template repository
+in https://github.com/Liber-UFPE/project-starter.
+--%>
 @import br.ufpe.liber.views.LinksHelper.linkTo
 @import br.ufpe.liber.assets.AssetsViewHelpers.at
 
@@ -13,11 +17,13 @@
 @if(maybeAsset.isPresent)
     !{val asset = maybeAsset.get()}
     <picture class="${pictureClasses}">
+        <source srcset="${linkTo(asset.variant("avif", prefix))}" type="image/avif">
         <source srcset="${linkTo(asset.variant("webp", prefix))}" type="image/webp">
         <img src="${linkTo(asset.fullpath(prefix))}"
              alt="${alt}"
              width="${width}"
              height="${height}"
-             class="${imgClasses}">
+             class="${imgClasses}"
+        />
     </picture>
 @endif
