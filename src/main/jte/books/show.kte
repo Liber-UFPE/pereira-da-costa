@@ -12,7 +12,7 @@
     @template.partials.content-section(content = @`
         <div class="leading-relaxed grid gap-3">
             <p class="text-2xl font-normal">Página ${page.number}</p>
-            <div class="text-lg text-gray-800 leading-relaxed">
+            <div class="text-lg text-gray-800 leading-relaxed space-y-4">
             @if(query.isEmpty)
                 ${Markdown.toHtml(page.formattedText())}
             @else
@@ -28,7 +28,7 @@
                 @if(previousPage.isPresent)
                 <li>
                     <a href="${linkTo("/livro/${book.number}/ano/${previousPage.get().year}/pagina/${previousPage.get().number}")}"
-                       class="inline-flex items-center justify-start w-full p-5 text-green-800 bg-white border border-green-300 rounded cursor-pointer hover:bg-green-50 hover:border-green-400 transition duration-150">
+                       class="inline-flex items-center justify-start w-full p-5 text-green-800 bg-white border border-green-300 rounded cursor-pointer hover:border-green-500 hover:shadow hover:shadow-green-300 transition duration-150">
                         <svg class="w-5 h-5 ms-3 mr-4 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
@@ -42,7 +42,7 @@
                 @if(nextPage.isPresent)
                 <li>
                     <a href="${linkTo("/livro/${book.number}/ano/${nextPage.get().year}/pagina/${nextPage.get().number}")}"
-                       class="inline-flex items-center justify-end text-right w-full p-5 text-green-800 bg-white border border-green-300 rounded cursor-pointer hover:bg-green-50 hover:border-green-400 transition duration-150">
+                       class="inline-flex items-center justify-end text-right w-full p-5 text-green-800 bg-white border border-green-300 rounded cursor-pointer hover:border-green-500 hover:shadow hover:shadow-green-300 transition duration-150">
                         <div class="block">
                             <div class="w-full text-lg font-semibold">Página Seguinte</div>
                             <div class="w-full">Ano ${nextPage.get().year} / Página ${nextPage.get().number}</div>
