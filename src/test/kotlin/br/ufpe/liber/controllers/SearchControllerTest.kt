@@ -1,12 +1,16 @@
 package br.ufpe.liber.controllers
 
+import br.ufpe.liber.get
+import br.ufpe.liber.pagination.Pagination
 import br.ufpe.liber.search.Indexer
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import io.micronaut.context.ApplicationContext
 import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.DefaultHttpClientConfiguration
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.uri.UriBuilder
@@ -58,6 +62,15 @@ class SearchControllerTest(
                 val url = UriBuilder.of(server.uri).path("/search").queryParam("query", query).build()
                 val request = HttpRequest.GET<Unit>(url)
                 client.retrieve(request) shouldContain "resultados para a busca por <mark>recife</mark>"
+            }
+
+            then("should the correct number of results per page") {
+                val query = "recife"
+                val response = client.get("/search?query=$query")
+                response.status() shouldBe HttpStatus.OK
+
+                val numberOfResults = response.body().lines().count { line -> line.contains("Acessar resultado") }
+                numberOfResults shouldBe Pagination.DEFAULT_PER_PAGE
             }
 
             then("return empty results if query is invalid") {
