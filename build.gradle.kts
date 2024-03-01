@@ -11,7 +11,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.3.4"
     id("gg.jte.gradle") version "3.1.9"
-    id("io.micronaut.aot") version "4.3.3"
+    id("io.micronaut.aot") version "4.3.4"
     // Provides better test output
     id("com.adarshr.test-logger") version "4.0.0"
     // Code Coverage:
