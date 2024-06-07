@@ -7,10 +7,7 @@ import java.util.Optional
 import java.util.TreeMap
 
 @Serializable
-data class Book(
-    val number: Int,
-    val pages: List<Page> = listOf(),
-) {
+data class Book(val number: Int, val pages: List<Page> = listOf()) {
     @Transient
     private val pagesMap: NavigableMap<Key, Page> = TreeMap()
 

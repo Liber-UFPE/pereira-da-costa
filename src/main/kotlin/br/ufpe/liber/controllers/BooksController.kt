@@ -14,8 +14,8 @@ import java.util.Optional
 @Produces(MediaType.TEXT_HTML)
 class BooksController(private val templates: Templates, private val booksRepository: BooksRepository) : KteController {
     @Get("/livro/{bookNumber}/ano/{year}/pagina/{pageNumber}")
-    fun show(bookNumber: Int, year: Int, pageNumber: Int, query: Optional<String>): HttpResponse<KteWriteable> {
-        return booksRepository
+    fun show(bookNumber: Int, year: Int, pageNumber: Int, query: Optional<String>): HttpResponse<KteWriteable> =
+        booksRepository
             .get(bookNumber)
             .flatMap { book ->
                 book.page(pageNumber, year).map { page ->
@@ -23,7 +23,6 @@ class BooksController(private val templates: Templates, private val booksReposit
                 }
             }
             .orElse(notFound(templates.notFound(currentRequestPath())))
-    }
 
     private fun currentRequestPath(): String = ServerRequestContext.currentRequest<Any>()
         .map { it.path }
