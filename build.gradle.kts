@@ -294,7 +294,7 @@ tasks {
 
 dependencies {
     // TEMP: Brings logback 1.4.14. Remove when micronaut-core updates.
-    implementation(platform("io.micronaut.logging:micronaut-logging-bom:1.5.1"))
+    implementation(platform("io.micronaut.logging:micronaut-logging-bom:1.6.0"))
 
     ksp(mn.micronaut.http.validation)
     ksp(mn.micronaut.serde.processor)
