@@ -932,14 +932,14 @@ __metadata:
   linkType: hard
 
 "@stylistic/eslint-plugin-js@npm:^4.0.0":
-  version: 4.3.0
-  resolution: "@stylistic/eslint-plugin-js@npm:4.3.0"
+  version: 4.4.0
+  resolution: "@stylistic/eslint-plugin-js@npm:4.4.0"
   dependencies:
     eslint-visitor-keys: "npm:^4.2.0"
     espree: "npm:^10.3.0"
   peerDependencies:
     eslint: ">=9.0.0"
-  checksum: 10c0/bba026278b15bb28282430d4e647ff8670956e9e183d4319672d30e26f6fd05dde304be0355d2215fb239f5e4cf90818fa02e914d396054c5a8c82580e8c8171
+  checksum: 10c0/9b24696656877869e22a1f5467321401103660caebdc81752408f6284d0937e0bca4cc3baf8e5a7c6136e44039a7d5e7435834e6426424b5027d76bcaf47210a
   languageName: node
   linkType: hard
 
@@ -2286,9 +2286,9 @@ __metadata:
   linkType: hard
 
 "globals@npm:^16.0.0":
-  version: 16.1.0
-  resolution: "globals@npm:16.1.0"
-  checksum: 10c0/51df6319b5b9e679338baf058ecf1125af0d3148b97e57592deabd65fca5c5dcdcca321d7589282bd6afbea9f5a40bc7329c746f46d56780813d7d1c457209a2
+  version: 16.2.0
+  resolution: "globals@npm:16.2.0"
+  checksum: 10c0/c2b3ea163faa6f8a38076b471b12f4bda891f7df7f7d2e8294fb4801d735a51a73431bf4c1696c5bf5dbca5e0a0db894698acfcbd3068730c6b12eef185dea25
   languageName: node
   linkType: hard
 
