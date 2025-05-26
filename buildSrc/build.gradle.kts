@@ -24,5 +24,5 @@ dependencies {
     // It can be removed when updating Apache Tika to a newer version
     implementation("org.apache.james:apache-mime4j-dom:0.8.12")
     implementation("org.apache.tika:tika-core:3.2.0")
-    implementation("org.apache.tika:tika-parsers-standard-package:3.1.0")
+    implementation("org.apache.tika:tika-parsers-standard-package:3.2.0")
 }
