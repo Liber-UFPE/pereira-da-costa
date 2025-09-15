@@ -35,6 +35,7 @@ plugins {
     // To buil the app ui frontend
     // https://siouan.github.io/frontend-gradle-plugin/
     id("org.siouan.frontend-jdk17") version "10.0.0"
+    id("org.spdx.sbom") version "0.9.0"
 }
 
 val runningOnCI: Boolean = getenv().getOrDefault("CI", "false").toBoolean()
@@ -192,6 +193,21 @@ val accessibilityTestImplementation: Configuration = configurations["accessibili
 val antJUnit: Configuration by configurations.creating
 
 tasks {
+    spdxSbom {
+        targets {
+            create("release") {
+                configurations = listOf("runtimeClasspath", "compileClasspath")
+
+                // Embed repo+rev for traceability in CI
+                scm {
+                    // These envs are present on GitHub Actions runners
+                    uri = "https://github.com/Liber-UFPE/pereira-da-costa"
+                    revision = providers.environmentVariable("GITHUB_SHA")
+                }
+            }
+        }
+    }
+
     /* -------------------------------- */
     /* Start: Node/assets configuration */
     /* -------------------------------- */
