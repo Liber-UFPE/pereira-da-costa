@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     implementation("org.apache.logging.log4j:log4j-core:2.25.1")
     implementation("commons-codec:commons-codec:1.19.0")
 
@@ -25,4 +25,8 @@ dependencies {
     implementation("org.apache.james:apache-mime4j-dom:0.8.13")
     implementation("org.apache.tika:tika-core:3.2.3")
     implementation("org.apache.tika:tika-parsers-standard-package:3.2.3")
+
+    // Add the Ant JUnit dependency. This was removed in Gradle 9.0.0 and
+    // now needs to be included manually.
+    implementation("org.apache.ant:ant-junit:1.10.15")
 }
