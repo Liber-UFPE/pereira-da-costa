@@ -1,38 +1,37 @@
+import br.ufpe.liber.tasks.CommandOutputValueSource
 import br.ufpe.liber.tasks.GenerateAssetsMetadataTask
+import br.ufpe.liber.tasks.JunitXmlResultAggregatorTask
+import br.ufpe.liber.tasks.Sources
 import com.adarshr.gradle.testlogger.theme.ThemeType
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.lordcodes.turtle.shellRun
 import java.lang.System.getenv
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 plugins {
-    kotlin("jvm") version "2.0.21"
-    kotlin("plugin.allopen") version "2.0.21"
-    kotlin("plugin.serialization") version "2.0.21"
-    id("com.google.devtools.ksp") version "2.0.21-1.0.28"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "2.2.20"
+    kotlin("plugin.allopen") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.20"
+    id("com.google.devtools.ksp") version "2.2.20-2.0.3"
+    id("com.gradleup.shadow") version "8.3.9"
     id("io.micronaut.application") version "4.5.4"
     id("gg.jte.gradle") version "3.2.1"
-    id("io.micronaut.aot") version "4.5.4"
     // Provides better test output
     id("com.adarshr.test-logger") version "4.0.0"
     // Code Coverage:
     // https://github.com/Kotlin/kotlinx-kover
-    id("org.jetbrains.kotlinx.kover") version "0.8.3"
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
     // Code Inspections
     // https://detekt.dev/
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     // Easily add new test sets
     // https://github.com/unbroken-dome/gradle-testsets-plugin
     id("org.unbroken-dome.test-sets") version "4.1.0"
-    // To manage docker images
-    // https://github.com/bmuschko/gradle-docker-plugin
-    id("com.bmuschko.docker-remote-api") version "9.4.0"
     // SonarQube/SonarCloud plugin
     // https://github.com/SonarSource/sonar-scanner-gradle
     id("org.sonarqube") version "6.3.1.5724"
-    // Add diktat
-    // https://github.com/saveourtool/diktat
-    id("com.saveourtool.diktat") version "2.0.0"
-    // To buil the app ui frontend
+    // To build the app ui frontend
     // https://siouan.github.io/frontend-gradle-plugin/
     id("org.siouan.frontend-jdk17") version "10.0.0"
     id("org.spdx.sbom") version "0.9.0"
@@ -43,7 +42,6 @@ val runningOnCI: Boolean = getenv().getOrDefault("CI", "false").toBoolean()
 val javaVersion: Int = 21
 
 val kotlinVersion: String = properties["kotlinVersion"] as String
-val micronautVersion: String = properties["micronautVersion"] as String
 val jteVersion: String = properties["jteVersion"] as String
 val luceneVersion: String = properties["luceneVersion"] as String
 val flexmarkVersion: String = properties["flexmarkVersion"] as String
@@ -51,6 +49,18 @@ val flexmarkVersion: String = properties["flexmarkVersion"] as String
 val releaseTag: String? by project
 version = releaseTag ?: "0.1"
 group = "br.ufpe.liber"
+
+val gitLatestCommit = providers.of(CommandOutputValueSource::class) {
+    parameters {
+        getCommandLine().set(listOf("git", "rev-parse", "--verify", "HEAD"))
+    }
+}
+
+val getNodeExecutable = providers.of(CommandOutputValueSource::class) {
+    parameters {
+        getCommandLine().set(listOf("which", "node"))
+    }
+}
 
 // Filter out generated files from source sets, and then filter in only existing files.
 fun filterSourceSet(sourceSet: SourceSet): List<File> = sourceSet.allSource
@@ -60,16 +70,6 @@ fun filterSourceSet(sourceSet: SourceSet): List<File> = sourceSet.allSource
         it.absolutePath.startsWith(layout.buildDirectory.asFile.get().absolutePath)
     }
     .filter(File::exists)
-
-val getNodeExecutable = try {
-    Result.success(
-        shellRun {
-            files.which("node") ?: error("Node.js is not installed or not in the path.")
-        },
-    )
-} catch (ex: IllegalStateException) {
-    Result.failure<Exception>(ex)
-}
 
 repositories {
     mavenCentral()
@@ -127,25 +127,19 @@ sonar {
     }
 }
 
-diktat {
-    inputs {
-        include("src/**/*.kt")
-        exclude("src/accessibilityTest/**/*.kt")
-    }
-}
-
 frontend {
-    nodeVersion = "18.19.1"
-    // The plugin will NOT try to download Node.js.
-    nodeDistributionProvided = getNodeExecutable.isSuccess
-    verboseModeEnabled = true
-    assembleScript = "run build"
-    nodeInstallDirectory = getNodeExecutable
+    nodeVersion = "18.20.3"
+
+    nodeDistributionProvided = getNodeExecutable.get().success
+    nodeInstallDirectory = getNodeExecutable.get()
         .map { file(it).parentFile.parentFile }
         .getOrElse {
             println("Could not find Node.js executable. ${it.message}")
             file(".gradle/nodejs")
         }
+
+    verboseModeEnabled = true
+    assembleScript = "run build"
 }
 
 micronaut {
@@ -154,17 +148,6 @@ micronaut {
     processing {
         incremental(true)
         annotations("$group.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading.set(false)
-        convertYamlToJava.set(false)
-        precomputeOperations.set(true)
-        cacheEnvironment.set(true)
-        optimizeClassLoading.set(true)
-        deduceEnvironment.set(true)
-        optimizeNetty.set(true)
     }
 }
 
@@ -242,10 +225,6 @@ tasks {
     /* End: Node/assets configuration */
     /* ------------------------------ */
 
-    named("check") {
-        dependsOn("diktatCheck")
-    }
-
     named<Test>("test") {
         useJUnitPlatform()
         // See https://kotest.io/docs/extensions/system_extensions.html#system-environment
@@ -257,17 +236,19 @@ tasks {
         reports.junitXml.required = runningOnCI
     }
 
+    named<ShadowJar>("shadowJar") {
+        manifest {
+            attributes("Date" to LocalDateTime.now(ZoneOffset.UTC).toString())
+            gitLatestCommit.get().map { it.trim() }.onSuccess { commit ->
+                attributes("Git-Last-Commit-Id" to commit)
+            }
+        }
+    }
+
     // Gradle requires that generateJte is run before some tasks
     configureEach {
         if (name == "inspectRuntimeClasspath" || name == "kspKotlin") {
             mustRunAfter("generateJte")
-        }
-    }
-
-    named<Jar>("jar") {
-        dependsOn.add("precompileJte")
-        from(fileTree(layout.buildDirectory.file("jte-classes").get().asFile.absolutePath)) {
-            include("**/.*.class")
         }
     }
 
@@ -279,38 +260,24 @@ tasks {
         shellRun("git", listOf("config", "core.hooksPath", "hooks"))
     }
 
-    register("mergeJUnitReports") {
+    register<JunitXmlResultAggregatorTask>("mergeJUnitReports") {
         val resultsDir = project.layout.buildDirectory.file("test-results/test").get().asFile
         val accessibilityResultsDir = project.layout.buildDirectory.file("test-results/accessibilityTest").get().asFile
-        val aggregateFile = "build/test-results/junit.xml"
 
-        doLast {
-            ant.withGroovyBuilder {
-                "taskdef"(
-                    "name" to "junitreport",
-                    "classname" to "org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator",
-                    "classpath" to antJUnit.asPath,
-                )
+        sources = Sources(
+            resultsDir to "TEST-*.xml",
+            accessibilityResultsDir to "TEST-*.xml",
+        )
 
-                // generates an XML report
-                "junitreport"("tofile" to aggregateFile) {
-                    "fileset"(
-                        "dir" to resultsDir,
-                        "includes" to "TEST-*.xml",
-                    )
-                    "fileset"(
-                        "dir" to accessibilityResultsDir,
-                        "includes" to "TEST-*.xml",
-                    )
-                }
-            }
-        }
+        toFile = project.layout.buildDirectory.file("junit.xml")
+        toDir = project.layout.buildDirectory.dir("test-results")
+
+        mustRunAfter("test")
     }
 }
 
 dependencies {
-    // TEMP: Brings logback 1.4.14. Remove when micronaut-core updates.
-    implementation(platform("io.micronaut.logging:micronaut-logging-bom:1.7.0"))
+    implementation(enforcedPlatform("io.netty:netty-bom:4.2.6.Final"))
 
     ksp(mn.micronaut.http.validation)
     ksp(mn.micronaut.serde.processor)
@@ -334,7 +301,7 @@ dependencies {
 
     implementation(kotlin("reflect", kotlinVersion))
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
     // jte dependencies
     jteGenerate("gg.jte:jte-models:$jteVersion")
