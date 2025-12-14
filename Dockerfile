@@ -26,7 +26,7 @@ RUN ./gradlew -Dsonar.gradle.skipCompile=true --console plain --no-configuration
       clean shadowJar -x test -x accessibilityTest \
       && mv -vf build/libs/*.jar app.jar
 
-FROM eclipse-temurin:25-jre-alpine
+FROM eclipse-temurin:25-jre-alpine@sha256:b51543f89580c1ba70e441cfbc0cfc1635c3c16d2e2d77fec9d890342a3a8687
 
 LABEL org.opencontainers.image.description="Pereira da Costa Java Application Service"
 LABEL org.opencontainers.image.url="https://github.com/Liber-UFPE/pereira-da-costa/"

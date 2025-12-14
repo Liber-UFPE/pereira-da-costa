@@ -24,8 +24,8 @@ jobs:
     name: Code Analysis / diktat
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: marcospereira/kotlin-diktat-action@v1
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: marcospereira/kotlin-diktat-action@c9ba835865b9297e310328e17cd7948f4608019d # v1
         with:
           patterns: "src/main/kotlin src/test/kotlin '!src/main/kotlin/br/ufpe/liber/tasks/*.kt'"
 
@@ -33,7 +33,7 @@ jobs:
     name: Code Analysis / ktlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: Install ktlint
         run: |
           curl -fSL -o ktlint \
@@ -50,7 +50,7 @@ jobs:
     name: Code Analysis / detekt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: Install detekt
         run: |
           curl -fSL -o detekt-cli-1.23.8.zip \
@@ -72,9 +72,9 @@ jobs:
     name: Code Analysis / stylelint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
           node-version: "lts/*"  # latest lts
           check-latest: true
@@ -86,9 +86,9 @@ jobs:
     name: Code Analysis / eslint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
           node-version: "lts/*"  # latest lts
           check-latest: true
@@ -103,9 +103,9 @@ jobs:
       matrix:
         node-version: [ 20, 21 ]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
@@ -123,8 +123,8 @@ jobs:
     name: Gradle / wrapper-validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: gradle/actions/wrapper-validation@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: gradle/actions/wrapper-validation@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
   compile:
     name: Build / compile
@@ -138,7 +138,7 @@ jobs:
       - esbuild-check
       - gradle-wrapper-validation
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
       - name: Set up Gradle and Java
         uses: ./.github/gradle-action
@@ -155,9 +155,9 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4
         with:
           fail-on-severity: high
           fail-on-scopes: runtime
@@ -168,14 +168,14 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           fetch-depth: 0
       - run: corepack enable
       - name: Set up Gradle and Java
         uses: ./.github/gradle-action
       - name: Cache SonarCloud packages
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
@@ -209,12 +209,12 @@ jobs:
           https://analytics-api.buildkite.com/v1/uploads
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f # v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/test-results/junit.xml
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5
         continue-on-error: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -227,8 +227,8 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@v5
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
       - name: Docker / Get image name
         id: dockerImageName
         # yamllint disable rule:line-length
@@ -236,7 +236,7 @@ jobs:
         run: |
           echo "dockerImageName=${{ env.REGISTRY }}/${{ github.repository }}" | tr '[:upper:]' '[:lower:]'>> "$GITHUB_OUTPUT"
       - name: Create Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
         with:
           context: .
           load: true  # Load is a shorthand for --output=type=docker

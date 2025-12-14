@@ -35,7 +35,7 @@ jobs:
       OWNER: ${{ github.repository_owner }}
       REPO: ${{ github.event.repository.name }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       # language="shell script"
       - run: |
           checks=20
@@ -99,21 +99,21 @@ jobs:
     needs:
       - generate-tag-name
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
       - uses: ./.github/gradle-action
       # Generate SPDX (JSON).
       - name: Generate CycloneDX SBOM
         run: ./gradlew :spdxSbom
       # Keep artifacts for auditing
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: spdx-sbom
           path: |
             ./build/spdx/release.spdx.json
       # Submit SPDX to GitHub Dependency Submission API
       - name: Submit SPDX SBOM to GitHub
-        uses: advanced-security/spdx-dependency-submission-action@v0.1.1
+        uses: advanced-security/spdx-dependency-submission-action@5530bab9ee4bbe66420ce8280624036c77f89746 # v0.1.1
         with:
           filePath: "build/spdx"
 
@@ -132,7 +132,7 @@ jobs:
       TAG_NAME: ${{ needs.generate-tag-name.outputs.tagName }}
       RELEASE_TITLE: Release ${{ needs.generate-tag-name.outputs.tagName }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - run: corepack enable
       - uses: ./.github/gradle-action
       - name: Generate jar artifacts
@@ -152,8 +152,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
       - name: Docker / Get image name
         id: dockerImageName
         # yamllint disable rule:line-length
@@ -166,11 +166,11 @@ jobs:
         run: |
           docker image build -t ${{ steps.dockerImageName.outputs.dockerImageName }}:latest .
       # Needs to log in to use docker scout below
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: docker/scout-action@v1
+      - uses: docker/scout-action@f8c776824083494ab0d56b8105ba2ca85c86e4de # v1
         continue-on-error: true
         with:
           command: quickview
@@ -189,7 +189,7 @@ jobs:
           docker container logs "$containerId"
           docker container stop "$containerId"
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
