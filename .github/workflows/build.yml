@@ -24,7 +24,7 @@ jobs:
     name: Code Analysis / diktat
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: marcospereira/kotlin-diktat-action@c9ba835865b9297e310328e17cd7948f4608019d # v1
         with:
           patterns: "src/main/kotlin src/test/kotlin '!src/main/kotlin/br/ufpe/liber/tasks/*.kt'"
@@ -33,7 +33,7 @@ jobs:
     name: Code Analysis / ktlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: Install ktlint
         run: |
           curl -fSL -o ktlint \
@@ -50,7 +50,7 @@ jobs:
     name: Code Analysis / detekt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: Install detekt
         run: |
           curl -fSL -o detekt-cli-1.23.8.zip \
@@ -72,7 +72,7 @@ jobs:
     name: Code Analysis / stylelint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - run: corepack enable
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
@@ -86,7 +86,7 @@ jobs:
     name: Code Analysis / eslint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - run: corepack enable
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
@@ -103,7 +103,7 @@ jobs:
       matrix:
         node-version: [ 20, 21 ]
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - run: corepack enable
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
         with:
@@ -123,7 +123,7 @@ jobs:
     name: Gradle / wrapper-validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: gradle/actions/wrapper-validation@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
   compile:
@@ -138,7 +138,7 @@ jobs:
       - esbuild-check
       - gradle-wrapper-validation
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - run: corepack enable
       - name: Set up Gradle and Java
         uses: ./.github/gradle-action
@@ -155,7 +155,7 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4
         with:
@@ -168,7 +168,7 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           fetch-depth: 0
       - run: corepack enable
@@ -227,7 +227,7 @@ jobs:
     needs:
       - compile
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
       - name: Docker / Get image name
         id: dockerImageName
