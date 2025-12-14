@@ -3679,9 +3679,9 @@ __metadata:
     htmx.org: "npm:^2.0.0"
     postcss: "npm:^8.4.35"
     sass-embedded: "npm:^1.95.1"
-    stylelint: "npm:^16.2.1"
-    stylelint-config-standard: "npm:^39.0.0"
-    stylelint-config-standard-scss: "npm:^16.0.0"
+    stylelint: "npm:16.25.0"
+    stylelint-config-standard: "npm:39.0.1"
+    stylelint-config-standard-scss: "npm:16.0.0"
     tailwindcss: "npm:^3.4.18"
   languageName: unknown
   linkType: soft
@@ -4212,7 +4212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:^16.0.0":
+"stylelint-config-standard-scss@npm:16.0.0":
   version: 16.0.0
   resolution: "stylelint-config-standard-scss@npm:16.0.0"
   dependencies:
@@ -4228,7 +4228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard@npm:^39.0.0":
+"stylelint-config-standard@npm:39.0.1, stylelint-config-standard@npm:^39.0.0":
   version: 39.0.1
   resolution: "stylelint-config-standard@npm:39.0.1"
   dependencies:
@@ -4257,7 +4257,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^16.2.1":
+"stylelint@npm:16.25.0":
   version: 16.25.0
   resolution: "stylelint@npm:16.25.0"
   dependencies:
