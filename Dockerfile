@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.9_10-jdk-jammy@sha256:41c8a28993a03b5dd042ce1afc7973c9a98bfbbbd6336eb1e32e673b1718d99c AS build
+FROM eclipse-temurin:21.0.10_7-jdk-jammy@sha256:4862c71ac621704c22fcdce4b4e055beebbe1e84d8a894c50045f3bff321aedd AS build
 
 # Install Node JS
 RUN apt-get update -y && apt-get install --no-install-recommends -y curl git \
