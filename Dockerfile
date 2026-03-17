@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.10_7-jdk-jammy@sha256:db76cc1ec33597273b26359c23ff1fc8d83a570ead897ce694e9d314e0014032 AS build
+FROM eclipse-temurin:25.0.2_10-jdk-jammy@sha256:02bd98c1dad8b8840a3d6f7a65fd3afb49d5b6afde3e02ec269ff7145a6123c4 AS build
 
 # Install Node JS
 RUN apt-get update -y && apt-get install --no-install-recommends -y curl git \
@@ -26,7 +26,7 @@ RUN ./gradlew -Dsonar.gradle.skipCompile=true --console plain --no-configuration
       clean shadowJar -x test -x accessibilityTest \
       && mv -vf build/libs/*.jar app.jar
 
-FROM eclipse-temurin:25-jre-alpine@sha256:f10d6259d0798c1e12179b6bf3b63cea0d6843f7b09c9f9c9c422c50e44379ec
+FROM eclipse-temurin:25.0.2_10-jre-alpine@sha256:f10d6259d0798c1e12179b6bf3b63cea0d6843f7b09c9f9c9c422c50e44379ec
 
 LABEL org.opencontainers.image.description="Pereira da Costa Java Application Service"
 LABEL org.opencontainers.image.url="https://github.com/Liber-UFPE/pereira-da-costa/"
